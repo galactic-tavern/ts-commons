@@ -10,6 +10,12 @@ export interface Sprite {
     animIdx : number
 }
 
+export interface SpriteImage {
+    imageData : string
+    imageIdx : number
+    costumeName : string
+}
+
 export interface ImageSprite extends Sprite {
-    imageData: Array<CanvasImageSource>
+    imageData: Array<HTMLImageElement>
 }
