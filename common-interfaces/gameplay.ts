@@ -5,6 +5,7 @@ export interface Game {
     gameId : string
     players : Array<Player>
     mapData : MapData
+    timestamp? : number
 }
 
 export interface DrawLayer {
@@ -27,6 +28,7 @@ export interface Player {
     speed : number
     animIdx : number
     lastAnimIdx : number
+    updatedAt : number
 }
 
 export const initPlayer : (id? : string) => Player = (id) => ({
@@ -39,5 +41,6 @@ export const initPlayer : (id? : string) => Player = (id) => ({
     lastY: 0,
     speed: 0.13,
     animIdx: 0,
-    lastAnimIdx: 0
+    lastAnimIdx: 0,
+    updatedAt: 0
 });
