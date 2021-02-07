@@ -4,6 +4,7 @@ import { Sprite } from "./sprites";
 export interface MapItem extends Pos {
     spriteId : number
     costumeIdx : number
+    props : {[key : string] : string}
 }
 
 export interface MapLayer {

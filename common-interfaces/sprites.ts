@@ -8,6 +8,7 @@ export interface Sprite {
     images? : Array<string>
     costumeNames?: {[key: string]: number}
     animIdx : number
+    defaultProps : {[key: string]: string}
 }
 
 export interface SpriteImage {
