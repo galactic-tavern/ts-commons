@@ -5,6 +5,7 @@ export interface MapItem extends Pos {
     spriteId : number
     costumeIdx : number
     props : {[key : string] : string}
+    code? : string
 }
 
 export interface MapLayer {
