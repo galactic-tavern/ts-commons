@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+  </variables>
+  <block type="event_whenplayerinteracts" id="Js*_j|8Mm5}*{`;B{rNt" x="252" y="86">
+    <next>
+      <block type="looks_makeplayersay" id="%Ow:Sa9!=YT0n)7j%EsE">
+        <value name="MESSAGE">
+          <shadow type="text" id="x2||[InEs*.l]3Lg-`q+">
+            <field name="TEXT">this is a chest!</field>
+          </shadow>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>
