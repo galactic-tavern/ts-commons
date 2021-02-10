@@ -14,7 +14,7 @@ export default class MakePlayerSay implements ScratchLikeFunc {
     register(emitter : EventEmitter, detail : {[key : string] : any}) {
         emitter.once("galactic-tick", () => {
             if (detail.playerId !== null) {
-                emitter.emit("set_player_words", {playerId: detail.playerId, words: this.valueGetter.exec()});
+                emitter.emit("scratch_like_dispatch", {type: "set_player_words", playerId: detail.playerId, words: this.valueGetter.exec()});
             }
 
             if (this.nextFunc !== null) {
