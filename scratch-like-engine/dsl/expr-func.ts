@@ -1,12 +1,10 @@
-import { ScratchLikeCodeGroup, ScratchLikeCodeType, ScratchLikeCoreFunc, ScratchLikeFunc, ScratchLikeVarMap } from "./core";
+import { ScratchLikeVarMap } from "./core";
 
-export interface ScratchLikeExprFunc extends ScratchLikeCoreFunc {
-    type : ScratchLikeCodeType.ExprFunc
+export interface ScratchLikeExprFunc  {
     exec : () => string | number
 }
 
 export class ScratchLikeLiteral implements ScratchLikeExprFunc {
-    type : ScratchLikeCodeType.ExprFunc
     private value : string|number
 
     constructor(val : string|number) {
@@ -20,8 +18,6 @@ export class ScratchLikeLiteral implements ScratchLikeExprFunc {
 }
 
 export class ScratchLikeReadVar implements ScratchLikeExprFunc {
-    type: ScratchLikeCodeType.ExprFunc;
-    group : ScratchLikeCodeGroup.Variables
     private varName : string
     private varMap : ScratchLikeVarMap
 
@@ -36,10 +32,8 @@ export class ScratchLikeReadVar implements ScratchLikeExprFunc {
 
 }
 
-export class ScratchLikePlus implements ScratchLikeFunc, ScratchLikeExprFunc {
-    displayName : "% + %"
-    type: ScratchLikeCodeType.ExprFunc;
-    group : ScratchLikeCodeGroup.Operators
+export class ScratchLikePlus implements ScratchLikeExprFunc {
+
     argList : [ScratchLikeExprFunc, ScratchLikeExprFunc]
 
     constructor(arg1 : ScratchLikeExprFunc, arg2 : ScratchLikeExprFunc) {

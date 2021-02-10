@@ -1,15 +1,10 @@
-import { ScratchLikeCodeGroup, ScratchLikeCodeType, ScratchLikeFunc } from "./core";
 import { ScratchLikeExprFunc } from "./expr-func";
 
-export interface ScratchLikeBoolFunc extends ScratchLikeFunc {
-    type : ScratchLikeCodeType.Test
+export interface ScratchLikeBoolFunc  {
     exec : () => boolean
 }
 
 export class ScratchLikeEquals implements ScratchLikeBoolFunc {
-    type : ScratchLikeCodeType.Test
-    group : ScratchLikeCodeGroup.Operators
-    displayName: "% = %"
     argList : [ ScratchLikeExprFunc, ScratchLikeExprFunc ]
 
     constructor(leftHand : ScratchLikeExprFunc, rightHand : ScratchLikeExprFunc) {
@@ -33,9 +28,6 @@ export class ScratchLikeEquals implements ScratchLikeBoolFunc {
 
 
 export class ScratchLikeNot implements ScratchLikeBoolFunc {
-    type: ScratchLikeCodeType.Test;
-    group : ScratchLikeCodeGroup.Operators
-    displayName : "not %"
     argList : [ ScratchLikeBoolFunc ]
 
     constructor(leftHand : ScratchLikeBoolFunc) {
@@ -49,9 +41,6 @@ export class ScratchLikeNot implements ScratchLikeBoolFunc {
 }
 
 export class ScratchLikeAnd implements ScratchLikeBoolFunc {
-    type: ScratchLikeCodeType.Test;
-    group : ScratchLikeCodeGroup.Operators
-    displayName : "% and %"
     argList : [ ScratchLikeBoolFunc, ScratchLikeBoolFunc ]
 
     constructor(leftHand : ScratchLikeBoolFunc, rightHand : ScratchLikeBoolFunc) {
@@ -64,9 +53,6 @@ export class ScratchLikeAnd implements ScratchLikeBoolFunc {
 }
 
 export class ScratchLikeOr implements ScratchLikeBoolFunc {
-    type: ScratchLikeCodeType.Test;
-    group : ScratchLikeCodeGroup.Operators
-    displayName : "% or %"
     argList : [ ScratchLikeBoolFunc, ScratchLikeBoolFunc ]
 
     constructor(leftHand : ScratchLikeBoolFunc, rightHand : ScratchLikeBoolFunc) {
