@@ -1,8 +1,8 @@
 import { parseString } from 'xml2js';
-import { ScratchLikeFunc } from './dsl/core';
-import { ScratchLikeExprFunc, ScratchLikeLiteral } from './dsl/expr-func';
-import MakePlayerSay from './dsl/MakePlayerSay';
-import WhenPlayerInteracts from './dsl/WhenPlayerInteracts';
+import { ScratchLikeFunc } from './core';
+import { ScratchLikeExprFunc, ScratchLikeLiteral } from './expr-func';
+import MakePlayerSay from './MakePlayerSay';
+import WhenPlayerInteracts from './WhenPlayerInteracts';
 
 const parseValue : (value : any) => ScratchLikeExprFunc = (value : any) => {
     if (value.block) {
@@ -19,9 +19,9 @@ const parseBlock : (block : any) => ScratchLikeFunc = (block : any) => {
     const value = block.value ? parseValue(block.value[0]) : new ScratchLikeLiteral("");
     switch (block["$"].type) {
         case "looks_makeplayersay":
-            return new MakePlayerSay(value, next);
+            return new MakePlayerSay(block['$'].id, value, next);
         case "event_whenplayerinteracts":
-            return new WhenPlayerInteracts(next);
+            return new WhenPlayerInteracts(block['$'].id, next);
         default:
             console.error(`Block type not recognised: ${block['$'].type}`)
             return null;

@@ -1,7 +1,20 @@
 import EventEmitter from "events";
 
 export interface ScratchLikeFunc {
+    getId : () => string
     register : (emitter : EventEmitter, detail? : {[key : string] : any}) => void
+    isEvent : () => boolean
+}
+
+export enum ScratchLikeEventType {
+    PLAYER_INTERACTS
+}
+
+export interface ScratchLikeEvent extends ScratchLikeFunc {
+    getEventDetail : () => {
+        eventType : ScratchLikeEventType
+        eventName : string
+    }
 }
 
 export class ScratchLikeVarMap {
