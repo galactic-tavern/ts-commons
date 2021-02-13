@@ -1,11 +1,4 @@
-import { ScratchLikeEvent } from "../scratch-like-engine/dsl/core";
 import { MapData, MapItem } from "./game-map";
-
-export interface GameCode {
-    atX : number
-    atY : number
-    eventHandlers: Array<ScratchLikeEvent>
-}
 
 export interface Game {
     mapId : number
@@ -13,7 +6,6 @@ export interface Game {
     players : Array<Player>
     mapData : MapData
     timestamp? : number
-    code? : Array<GameCode>
 }
 
 export interface DrawLayer {

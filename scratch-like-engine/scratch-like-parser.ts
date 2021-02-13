@@ -1,8 +1,8 @@
 import { parseString } from 'xml2js';
-import { ScratchLikeFunc } from './core';
-import { ScratchLikeExprFunc, ScratchLikeLiteral } from './expr-func';
-import MakePlayerSay from './MakePlayerSay';
-import WhenPlayerInteracts from './WhenPlayerInteracts';
+import { ScratchLikeFunc } from './dsl/core';
+import { ScratchLikeExprFunc, ScratchLikeLiteral } from './dsl/expr-func';
+import MakePlayerSay from './dsl/MakePlayerSay';
+import WhenPlayerInteracts from './dsl/WhenPlayerInteracts';
 
 const parseValue : (value : any) => ScratchLikeExprFunc = (value : any) => {
     if (value.block) {

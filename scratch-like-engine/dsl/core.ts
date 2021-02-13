@@ -1,8 +1,18 @@
 import EventEmitter from "events";
+import { MapItem } from "../../common-interfaces/game-map";
+import { Player } from "../../common-interfaces/gameplay"
+import { Sprite } from "../../common-interfaces/sprites";
+
+export interface InvokeDetail {
+    gameId : string
+    player : Player
+    mapItem : MapItem
+    sprite : Sprite
+}
 
 export interface ScratchLikeFunc {
     getId : () => string
-    register : (emitter : EventEmitter, detail? : {[key : string] : any}) => void
+    register : (emitter : EventEmitter, detail? : InvokeDetail) => void
     isEvent : () => boolean
 }
 
@@ -11,10 +21,8 @@ export enum ScratchLikeEventType {
 }
 
 export interface ScratchLikeEvent extends ScratchLikeFunc {
-    getEventDetail : () => {
-        eventType : ScratchLikeEventType
-        eventName : string
-    }
+    getEventType : () => ScratchLikeEventType
+    trigger : (detail : InvokeDetail) => void
 }
 
 export class ScratchLikeVarMap {
