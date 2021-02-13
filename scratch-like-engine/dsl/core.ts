@@ -6,8 +6,8 @@ import { Sprite } from "../../common-interfaces/sprites";
 export interface InvokeDetail {
     gameId : string
     player : Player
-    mapItem : MapItem
-    sprite : Sprite
+    mapItem? : MapItem
+    sprite? : Sprite
 }
 
 export interface ScratchLikeFunc {

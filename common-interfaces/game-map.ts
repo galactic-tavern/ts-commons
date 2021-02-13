@@ -1,3 +1,4 @@
+import { ScratchLikeEvent } from "../scratch-like-engine/dsl/core";
 import { Pos } from "./basic";
 import { Sprite } from "./sprites";
 
@@ -6,6 +7,7 @@ export interface MapItem extends Pos {
     costumeIdx : number
     props : {[key : string] : string}
     code? : string
+    eventTriggers? : Array<ScratchLikeEvent>
 }
 
 export interface MapLayer {

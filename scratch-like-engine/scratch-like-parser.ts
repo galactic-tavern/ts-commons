@@ -1,5 +1,5 @@
 import { parseString } from 'xml2js';
-import { ScratchLikeFunc } from './dsl/core';
+import { ScratchLikeEvent, ScratchLikeFunc } from './dsl/core';
 import { ScratchLikeExprFunc, ScratchLikeLiteral } from './dsl/expr-func';
 import MakePlayerSay from './dsl/MakePlayerSay';
 import WhenPlayerInteracts from './dsl/WhenPlayerInteracts';
@@ -28,17 +28,29 @@ const parseBlock : (block : any) => ScratchLikeFunc = (block : any) => {
     }
 }
 
-const parseObject : (codeObj : { [key: string] : any }) => Array<ScratchLikeFunc> = (codeObj : { [key: string] : any }) => 
+const parseObject : (codeObj : { [key: string] : any }) => Array<ScratchLikeEvent> = (codeObj : { [key: string] : any }) => 
     (codeObj.block || []).map(parseBlock);
 
-const codeFromXml = (code : String, cb : (code : Array<ScratchLikeFunc>) => void) => {
-    parseString(code, (err, result) => {
-        if (err !== null) {
-            console.error(err);
-        } else {
-            cb(parseObject(result.xml));
-        }
+const parseXml = (code : String) => {
+
+    return new Promise<Array<ScratchLikeEvent>>((resolve, reject) => {
+        parseString(code, (err, result) => {
+            if (err !== null) {
+                reject(err);
+            } else {
+                resolve(parseObject(result.xml));
+            }
+        });
     });
+}
+
+const codeFromXml = async (code : String) => {
+    try {
+        const data = await parseXml(code);
+        return data;
+    } catch (err) {
+        console.error(err);
+    }
 }
 
 export { codeFromXml }

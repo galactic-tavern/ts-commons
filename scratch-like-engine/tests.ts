@@ -28,7 +28,7 @@ const testMapItem : MapItem = {
     costumeIdx: 0,
     props: {}
 }
-codeFromXml(readFileSync('tests/1.xml').toString(), (code : Array<ScratchLikeFunc>) => {
+codeFromXml(readFileSync('tests/1.xml').toString()).then((code) => {
     const emitter = new EventEmitter();
     emitter.addListener("scratch_like_dispatch", console.log);
 
