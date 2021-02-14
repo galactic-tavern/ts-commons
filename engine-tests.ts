@@ -1,10 +1,10 @@
-import { codeFromXml } from "./scratch-like-parser";
+import { codeFromXml } from "./scratch-like-engine/scratch-like-parser";
 import { readFileSync } from "fs";
-import { ScratchLikeEvent, ScratchLikeEventType, ScratchLikeFunc } from "./dsl/core";
+import { ScratchLikeEvent } from "./scratch-like-engine/dsl/core";
 import EventEmitter from "events";
-import { initPlayer } from "../common-interfaces/gameplay";
-import { MapItem } from "../common-interfaces/game-map";
-import { Sprite } from "../common-interfaces/sprites";
+import { initPlayer } from "./common-interfaces/gameplay";
+import { MapItem } from "./common-interfaces/game-map";
+import { Sprite } from "./common-interfaces/sprites";
 
 
 const testPlayer = initPlayer("test-player");
@@ -49,5 +49,9 @@ codeFromXml(readFileSync('tests/1.xml').toString()).then((code) => {
 
     console.log("3");
     emitter.emit("galactic-tick");
+    console.log("4");
+
+    emitter.emit("galactic-tick");
+
 
 });

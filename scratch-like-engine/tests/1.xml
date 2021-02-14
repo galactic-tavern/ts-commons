@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <xml xmlns="http://www.w3.org/1999/xhtml">
-  <variables>
-  </variables>
+  <variables/>
   <block type="event_whenplayerinteracts" id="Js*_j|8Mm5}*{`;B{rNt" x="252" y="86">
     <next>
       <block type="looks_makeplayersay" id="%Ow:Sa9!=YT0n)7j%EsE">
@@ -10,6 +9,9 @@
             <field name="TEXT">this is a chest!</field>
           </shadow>
         </value>
+        <next>
+          <block type="looks_nextcostume" id="o!Lv~V5UH#Z4SZLb{f?^"/>
+        </next>
       </block>
     </next>
   </block>

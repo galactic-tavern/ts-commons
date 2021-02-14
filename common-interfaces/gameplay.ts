@@ -37,6 +37,7 @@ export interface Player {
     animIdx : number
     lastAnimIdx : number
     updatedAt : number
+    words? : string
 }
 
 export const initPlayer : (id? : string) => Player = (id) => ({

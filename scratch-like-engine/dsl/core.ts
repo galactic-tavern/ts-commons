@@ -1,7 +1,11 @@
-import EventEmitter from "events";
 import { MapItem } from "../../common-interfaces/game-map";
-import { Player } from "../../common-interfaces/gameplay"
+import { Player } from "../../common-interfaces/gameplay";
 import { Sprite } from "../../common-interfaces/sprites";
+
+export enum ScratchLikeActionTypes {
+    MAKE_PLAYER_SAY = "set_player_words",
+    NEXT_COSTUME = "next_costume"
+}
 
 export interface InvokeDetail {
     gameId : string
@@ -10,15 +14,22 @@ export interface InvokeDetail {
     sprite? : Sprite
 }
 
-export interface ScratchLikeFunc {
-    getId : () => string
-    register : (emitter : EventEmitter, detail? : InvokeDetail) => void
-    isEvent : () => boolean
-}
-
 export enum ScratchLikeEventType {
     PLAYER_INTERACTS
 }
+
+export interface ScratchLikeDispatcher {
+    once : (eventName : string, callback : (...args: any[]) => void) => void
+    emit : (eventName : string, arg : { type: ScratchLikeActionTypes, payload : {[key : string] : any} }) => void
+}
+
+export interface ScratchLikeFunc {
+    getId : () => string
+    register : (emitter : ScratchLikeDispatcher, detail? : InvokeDetail) => void
+    isEvent : () => boolean
+}
+
+
 
 export interface ScratchLikeEvent extends ScratchLikeFunc {
     getEventType : () => ScratchLikeEventType

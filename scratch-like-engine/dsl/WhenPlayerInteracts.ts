@@ -1,10 +1,9 @@
-import { InvokeDetail, ScratchLikeEvent, ScratchLikeEventType, ScratchLikeFunc } from "./core";
-import EventEmitter from "events";
+import { InvokeDetail, ScratchLikeDispatcher, ScratchLikeEvent, ScratchLikeEventType, ScratchLikeFunc } from "./core";
 
 export default class WhenPlayerInteracts implements ScratchLikeEvent {
     private nextFunc : ScratchLikeFunc = null
     private id : string
-    private emitter : EventEmitter = null;
+    private emitter : ScratchLikeDispatcher = null;
 
     constructor(id: string, nextFunc : ScratchLikeFunc) {
         this.id = id;
@@ -26,7 +25,7 @@ export default class WhenPlayerInteracts implements ScratchLikeEvent {
         }
     }
 
-    register(emitter : EventEmitter) {
+    register(emitter : ScratchLikeDispatcher) {
         this.emitter = emitter;
     }
 }

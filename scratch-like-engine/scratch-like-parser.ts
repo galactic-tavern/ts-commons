@@ -2,6 +2,7 @@ import { parseString } from 'xml2js';
 import { ScratchLikeEvent, ScratchLikeFunc } from './dsl/core';
 import { ScratchLikeExprFunc, ScratchLikeLiteral } from './dsl/expr-func';
 import MakePlayerSay from './dsl/MakePlayerSay';
+import NextCostume from './dsl/NextCostume';
 import WhenPlayerInteracts from './dsl/WhenPlayerInteracts';
 
 const parseValue : (value : any) => ScratchLikeExprFunc = (value : any) => {
@@ -20,6 +21,8 @@ const parseBlock : (block : any) => ScratchLikeFunc = (block : any) => {
     switch (block["$"].type) {
         case "looks_makeplayersay":
             return new MakePlayerSay(block['$'].id, value, next);
+        case "looks_nextcostume":
+            return new NextCostume(block['$'].id, next);
         case "event_whenplayerinteracts":
             return new WhenPlayerInteracts(block['$'].id, next);
         default:
