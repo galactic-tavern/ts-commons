@@ -24,16 +24,21 @@ export interface ScratchLikeDispatcher {
 }
 
 export interface ScratchLikeFunc {
-    getId : () => string
-    register : (emitter : ScratchLikeDispatcher, detail? : InvokeDetail) => void
-    isEvent : () => boolean
+    getId(): string
+    register(...any): void
+    isEvent(): boolean
 }
 
-
-
 export interface ScratchLikeEvent extends ScratchLikeFunc {
-    getEventType : () => ScratchLikeEventType
-    trigger : (detail : InvokeDetail) => void
+    endSequence(): void
+    getEventType(): ScratchLikeEventType
+    trigger(detail : InvokeDetail): void
+    register(emitter : ScratchLikeDispatcher): void
+}
+
+export interface ScratchLikeSequenceStep extends ScratchLikeFunc {
+    register(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void): void
+    exec(emitter : ScratchLikeDispatcher, detail? : InvokeDetail): void
 }
 
 export class ScratchLikeVarMap {

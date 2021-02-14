@@ -50,7 +50,7 @@ const parseXml = (code : String) => {
 const codeFromXml = async (code : String) => {
     try {
         const data = await parseXml(code);
-        return data;
+        return data.filter(block => block.isEvent());
     } catch (err) {
         console.error(err);
     }
