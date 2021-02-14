@@ -14,13 +14,12 @@ const parseValue : (value : any) => ScratchLikeExprFunc = (value : any) => {
 }
 
 const parseBlock : (block : any) => ScratchLikeFunc = (block : any) => {
-//    console.log(JSON.stringify(block, null, 2));
 
     const next = block.next ? parseBlock(block.next[0].block[0]) : null;
     const value = block.value ? parseValue(block.value[0]) : new ScratchLikeLiteral("");
     switch (block["$"].type) {
         case "looks_makeplayersay":
-            return new MakePlayerSay(block['$'].id, value, next);
+            return new MakePlayerSay(block['$'].id, next, value);
         case "looks_nextcostume":
             return new NextCostume(block['$'].id, next);
         case "event_whenplayerinteracts":

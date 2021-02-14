@@ -5,7 +5,7 @@ import ScratchLikeSequenceFunc from "./ScratchLikeSequenceFunc";
 export default class MakePlayerSay extends ScratchLikeSequenceFunc {
     private valueGetter : ScratchLikeExprFunc
 
-    constructor(id : string, valueGetter : ScratchLikeExprFunc, nextFunc : ScratchLikeFunc) {
+    constructor(id : string, nextFunc : ScratchLikeFunc, valueGetter : ScratchLikeExprFunc) {
         super(id, nextFunc);
         this.valueGetter = valueGetter;
     }
