@@ -69,7 +69,7 @@ codeFromXml(readFileSync('tests/2.xml').toString()).then((code) => {
     parsedEvents[0].trigger({player: testPlayer, mapItem: testMapItem, gameId: "foo", sprite: testSprite})
 
     
-    for(let i = 0; i < 30; i++) {
+    for(let i = 0; i < 4; i++) {
         console.log(`${i + 1} - iteration`);
         emitter.emit("galactic-tick");
         emitter.emit("galactic-tick");

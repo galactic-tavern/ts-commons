@@ -17,7 +17,7 @@ export default class ScratchLikeSequenceFunc implements ScratchLikeSequenceStep 
     }
 
     exec(emitter : ScratchLikeDispatcher, detail : InvokeDetail) {
-        console.error("exec not implemented");
+        console.error("exec not implemented for block: " + this.id);
     }
     
     register(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {

@@ -1,10 +1,11 @@
 import { parseString } from 'xml2js';
 import { ScratchLikeEvent, ScratchLikeFunc } from './dsl/core';
-import { ScratchLikeExprFunc, ScratchLikeLiteral } from './dsl/expr-func';
+import { ScratchLikeExprFunc, ScratchLikeLiteral, ScratchLikePlus } from './dsl/expr-func';
 import Forever from './dsl/Forever';
 import MakePlayerSay from './dsl/MakePlayerSay';
 import NextCostume from './dsl/NextCostume';
 import Repeat from './dsl/Repeat';
+import ScratchLikeSequenceFunc from './dsl/ScratchLikeSequenceFunc';
 import SetBlockPlayer from './dsl/SetBlockPlayer';
 import SwitchCostumeTo from './dsl/SwitchCostumeTo';
 import WhenMapStarts from './dsl/WhenMapStarts';
@@ -14,10 +15,20 @@ import WhenPlayerInteracts from './dsl/WhenPlayerInteracts';
 
 const isNumberType = (fieldName : string) => ['NUM', 'COSTUME_SELECT'].indexOf(fieldName) > -1
 
+const parseExprBlock : (block : any) => ScratchLikeExprFunc = (block : any) => {
+    const values = block.value.map((val : any) => parseValue(val));
+    switch (block["$"].type) {
+        case 'operator_add':
+            return new ScratchLikePlus(values[0], values[1]);
+        default:
+            console.error(`Block type not recognised: ${block['$'].type}`)
+            return new ScratchLikeLiteral(`Block type not recognised: ${block['$'].type}`);
+    }
+}
+
 const parseValue : (value : any) => ScratchLikeExprFunc = (value : any) => {
-    if (value.block) {
-        console.error("blocks as expressions not yet supported");
-        return new ScratchLikeLiteral("blocks as expressions not yet supported");
+    if (value.block) {        
+        return parseExprBlock(value.block[0]);
     }
     if (isNumberType(value.shadow[0].field[0]['$'].name)) {
         return new ScratchLikeLiteral(parseInt(value.shadow[0].field[0]["_"]));
@@ -54,7 +65,7 @@ const parseBlock : (block : any) => ScratchLikeFunc = (block : any) => {
             return new Repeat(block['$'].id, next, statements[0], value);
         default:
             console.error(`Block type not recognised: ${block['$'].type}`)
-            return null;
+            return new ScratchLikeSequenceFunc(block['$'].type, next);
     }
 }
 

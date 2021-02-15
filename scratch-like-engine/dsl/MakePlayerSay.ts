@@ -16,7 +16,7 @@ export default class MakePlayerSay extends ScratchLikeSequenceFunc {
             payload: { 
                 gameId: detail.gameId,
                 playerId: detail.player.id, 
-                words: this.valueGetter.exec()
+                words: `${this.valueGetter.exec()}`
             }
         });
     }
