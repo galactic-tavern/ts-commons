@@ -28,6 +28,8 @@ const testMapItem : MapItem = {
     costumeIdx: 0,
     props: {}
 }
+
+/*
 codeFromXml(readFileSync('tests/1.xml').toString()).then((code) => {
     const emitter = new EventEmitter();
     emitter.addListener("scratch_like_dispatch", console.log);
@@ -53,5 +55,25 @@ codeFromXml(readFileSync('tests/1.xml').toString()).then((code) => {
 
     emitter.emit("galactic-tick");
 
+});
+*/
+
+codeFromXml(readFileSync('tests/2.xml').toString()).then((code) => {
+    const emitter = new EventEmitter();
+    emitter.addListener("scratch_like_dispatch", (msg) => console.log(JSON.stringify(msg)));
+
+//    console.log(code);
+    
+    code.forEach((block) => block.register(emitter));
+    const parsedEvents = code.filter(block => block.isEvent()).map((block : ScratchLikeEvent) => block);
+    parsedEvents[0].trigger({player: testPlayer, mapItem: testMapItem, gameId: "foo", sprite: testSprite})
+
+    
+    for(let i = 0; i < 30; i++) {
+        console.log(`${i + 1} - iteration`);
+        emitter.emit("galactic-tick");
+        emitter.emit("galactic-tick");
+        emitter.emit("galactic-tick");
+    }
 
 });

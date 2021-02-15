@@ -12,6 +12,7 @@ export interface InvokeDetail {
     player : Player
     mapItem? : MapItem
     sprite? : Sprite
+    timesLeft? : number
 }
 
 export enum ScratchLikeEventType {
@@ -25,7 +26,7 @@ export interface ScratchLikeDispatcher {
 
 export interface ScratchLikeFunc {
     getId(): string
-    register(...any): void
+    register(...args : any[]): void
     isEvent(): boolean
 }
 

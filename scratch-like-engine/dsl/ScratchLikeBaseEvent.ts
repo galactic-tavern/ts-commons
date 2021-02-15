@@ -10,7 +10,7 @@ export default class ScratchLikeBaseEvent implements ScratchLikeEvent {
         this.id = id;
         this.nextFunc = nextFunc;
     }
-    getEventType() {
+    getEventType() : ScratchLikeEventType  {
         console.error("Method getEventType needs to be overridden");
         return null;
     }

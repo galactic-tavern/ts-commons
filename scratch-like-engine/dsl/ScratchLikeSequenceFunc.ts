@@ -1,7 +1,7 @@
 import { InvokeDetail, ScratchLikeDispatcher, ScratchLikeFunc, ScratchLikeSequenceStep } from "./core";
 
 export default class ScratchLikeSequenceFunc implements ScratchLikeSequenceStep {
-    private nextFunc : ScratchLikeFunc
+    protected nextFunc : ScratchLikeFunc
     private id : string
 
     constructor(id : string, nextFunc : ScratchLikeFunc) {
