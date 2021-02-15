@@ -6,15 +6,20 @@ import MakePlayerSay from './dsl/MakePlayerSay';
 import NextCostume from './dsl/NextCostume';
 import Repeat from './dsl/Repeat';
 import SetBlockPlayer from './dsl/SetBlockPlayer';
+import SwitchCostumeTo from './dsl/SwitchCostumeTo';
 import WhenMapStarts from './dsl/WhenMapStarts';
 import WhenPlayerInteracts from './dsl/WhenPlayerInteracts';
+ 
+
+
+const isNumberType = (fieldName : string) => ['NUM', 'COSTUME_SELECT'].indexOf(fieldName) > -1
 
 const parseValue : (value : any) => ScratchLikeExprFunc = (value : any) => {
     if (value.block) {
         console.error("blocks as expressions not yet supported");
         return new ScratchLikeLiteral("blocks as expressions not yet supported");
     }
-    if (value.shadow[0].field[0]['$'].name === 'NUM') {
+    if (isNumberType(value.shadow[0].field[0]['$'].name)) {
         return new ScratchLikeLiteral(parseInt(value.shadow[0].field[0]["_"]));
     }
     return new ScratchLikeLiteral(value.shadow[0].field[0]["_"]);
@@ -28,11 +33,13 @@ const parseBlock : (block : any) => ScratchLikeFunc = (block : any) => {
 
     const next = block.next ? parseBlock(block.next[0].block[0]) : null;
     const value = block.value ? parseValue(block.value[0]) : new ScratchLikeLiteral("");
-    const statements = block.statement ? block.statement.map(s => parseStatement(s)) : [];
+    const statements = block.statement ? block.statement.map((s : any) => parseStatement(s)) : [];
 
     switch (block["$"].type) {
         case "looks_makeplayersay":
             return new MakePlayerSay(block['$'].id, next, value);
+        case "looks_switchcostumeto":
+            return new SwitchCostumeTo(block['$'].id, next, value);
         case "motion_setblockplayer":
             return new SetBlockPlayer(block['$'].id, next, value);
         case "looks_nextcostume":

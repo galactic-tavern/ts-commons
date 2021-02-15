@@ -3,10 +3,13 @@ import { Player } from "../../common-interfaces/gameplay";
 import { Sprite } from "../../common-interfaces/sprites";
 
 
+
+
 export enum ScratchLikeActionTypes {
     MAKE_PLAYER_SAY = "set_player_words",
     NEXT_COSTUME = "next_costume",
-    SET_BLOCK_PLAYER = "SET_BLOCK_PLAYER"
+    SET_BLOCK_PLAYER = "SET_BLOCK_PLAYER",
+    SWITCH_COSTUME_TO = "SWITCH_COSTUME_TO"
 }
 
 export interface InvokeDetail {
