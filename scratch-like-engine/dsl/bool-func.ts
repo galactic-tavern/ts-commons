@@ -1,7 +1,7 @@
 import { ScratchLikeExprFunc } from "./expr-func";
 
-export interface ScratchLikeBoolFunc  {
-    exec : () => boolean
+export interface ScratchLikeBoolFunc extends ScratchLikeExprFunc {
+    exec() : boolean
 }
 
 export class ScratchLikeEquals implements ScratchLikeBoolFunc {
@@ -13,7 +13,7 @@ export class ScratchLikeEquals implements ScratchLikeBoolFunc {
 
     exec() {
         const arg1 = this.argList[0].exec();
-        const arg2 = typeof this.argList[1].exec();
+        const arg2 = this.argList[1].exec();
 
         if (arg1 === null || arg2 === null) {
             return false;

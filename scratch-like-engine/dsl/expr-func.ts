@@ -1,7 +1,7 @@
 import { ScratchLikeVarMap } from "./core";
 
 export interface ScratchLikeExprFunc  {
-    exec : () => string | number
+    exec(): string | number | boolean
 }
 
 export class ScratchLikeLiteral implements ScratchLikeExprFunc {
@@ -13,6 +13,20 @@ export class ScratchLikeLiteral implements ScratchLikeExprFunc {
 
     exec() {
         return this.value;
+    }
+
+}
+
+export class ScratchLikePropGetter implements ScratchLikeExprFunc {
+    private getProp : (key : string) => any
+    private key : string
+
+    constructor(key : string, getProp : (key : string) => any) {
+        this.key = key;
+        this.getProp = getProp;
+    }
+    exec() {
+        return this.getProp(this.key);
     }
 
 }

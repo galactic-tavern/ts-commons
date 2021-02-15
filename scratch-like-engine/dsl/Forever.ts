@@ -11,12 +11,10 @@ export default class Forever extends ScratchLikeSequenceFunc {
 
 
     register(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
-        emitter.once("galactic-tick", () => {
-            if (this.subStackFunc) {
-                this.subStackFunc.register(emitter, detail, () => {
-                    this.register(emitter, detail, endSequence)
-                })
-            }
-        });
+        if (this.subStackFunc) {
+            this.subStackFunc.register(emitter, detail, () => {
+                this.register(emitter, detail, endSequence)
+            })
+        }
     }
 }
