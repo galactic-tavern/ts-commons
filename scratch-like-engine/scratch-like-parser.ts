@@ -13,6 +13,7 @@ import WhenPlayerInteracts from './dsl/WhenPlayerInteracts';
 import IsBlockingPlayer from './dsl/IsBlockingPlayer';
 import ScratchLikeIf from './dsl/ScratchLikeIf';
 import { ScratchLikeAnd, ScratchLikeEquals, ScratchLikeNot, ScratchLikeOr } from './dsl/bool-func';
+import ScratchLikeIfElse from './dsl/ScratchLikeIfElse';
 
 
 const isNumberType = (fieldName : string) => ['NUM', 'COSTUME_SELECT'].indexOf(fieldName) > -1
@@ -63,6 +64,8 @@ const parseBlock : (block : any, getProp : (key: string) => any) => ScratchLikeF
     switch (block["$"].type) {
         case "control_if":
             return new ScratchLikeIf(block['$'].id, next, statements[0], value)
+        case "control_if_else":
+            return new ScratchLikeIfElse(block['$'].id, next, statements[0], statements[1], value)
         case "looks_makeplayersay":
             return new MakePlayerSay(block['$'].id, next, value);
         case "looks_switchcostumeto":

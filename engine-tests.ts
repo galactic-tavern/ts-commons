@@ -58,7 +58,7 @@ codeFromXml(readFileSync('tests/1.xml').toString()).then((code) => {
 });
 */
 
-codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'blocking' ? 'no' : 0 ).then((code) => {
+codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'blocking' ? 'yes' : 0 ).then((code) => {
     const emitter = new EventEmitter();
     emitter.addListener("scratch_like_dispatch", (msg) => console.log(JSON.stringify(msg)));
 
