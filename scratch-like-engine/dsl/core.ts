@@ -2,9 +2,11 @@ import { MapItem } from "../../common-interfaces/game-map";
 import { Player } from "../../common-interfaces/gameplay";
 import { Sprite } from "../../common-interfaces/sprites";
 
+
 export enum ScratchLikeActionTypes {
     MAKE_PLAYER_SAY = "set_player_words",
-    NEXT_COSTUME = "next_costume"
+    NEXT_COSTUME = "next_costume",
+    SET_BLOCK_PLAYER = "SET_BLOCK_PLAYER"
 }
 
 export interface InvokeDetail {
@@ -16,7 +18,8 @@ export interface InvokeDetail {
 }
 
 export enum ScratchLikeEventType {
-    PLAYER_INTERACTS
+    PLAYER_INTERACTS,
+    MAP_STARTS
 }
 
 export interface ScratchLikeDispatcher {

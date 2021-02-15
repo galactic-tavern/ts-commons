@@ -1,6 +1,6 @@
-import { InvokeDetail, ScratchLikeDispatcher, ScratchLikeEvent, ScratchLikeEventType, ScratchLikeFunc } from "./core";
+import { InvokeDetail, ScratchLikeDispatcher, ScratchLikeFunc } from "./core";
 
-export default class ScratchLikeBaseEvent implements ScratchLikeEvent {
+export default class ScratchLikeBaseEvent  {
     private nextFunc : ScratchLikeFunc = null
     private id : string
     private emitter : ScratchLikeDispatcher = null;
@@ -9,10 +9,6 @@ export default class ScratchLikeBaseEvent implements ScratchLikeEvent {
     constructor(id: string, nextFunc : ScratchLikeFunc) {
         this.id = id;
         this.nextFunc = nextFunc;
-    }
-    getEventType() : ScratchLikeEventType  {
-        console.error("Method getEventType needs to be overridden");
-        return null;
     }
 
     getId() {

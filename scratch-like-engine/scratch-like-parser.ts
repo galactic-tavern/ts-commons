@@ -5,6 +5,8 @@ import Forever from './dsl/Forever';
 import MakePlayerSay from './dsl/MakePlayerSay';
 import NextCostume from './dsl/NextCostume';
 import Repeat from './dsl/Repeat';
+import SetBlockPlayer from './dsl/SetBlockPlayer';
+import WhenMapStarts from './dsl/WhenMapStarts';
 import WhenPlayerInteracts from './dsl/WhenPlayerInteracts';
 
 const parseValue : (value : any) => ScratchLikeExprFunc = (value : any) => {
@@ -31,10 +33,14 @@ const parseBlock : (block : any) => ScratchLikeFunc = (block : any) => {
     switch (block["$"].type) {
         case "looks_makeplayersay":
             return new MakePlayerSay(block['$'].id, next, value);
+        case "motion_setblockplayer":
+            return new SetBlockPlayer(block['$'].id, next, value);
         case "looks_nextcostume":
             return new NextCostume(block['$'].id, next);
         case "event_whenplayerinteracts":
             return new WhenPlayerInteracts(block['$'].id, next);
+        case "event_whenmapstarts":
+            return new WhenMapStarts(block['$'].id, next);
         case "control_forever":
             return new Forever(block['$'].id, next, statements[0]);
         case "control_repeat":
