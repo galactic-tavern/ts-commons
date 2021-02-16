@@ -64,3 +64,23 @@ export class ScratchLikePlus implements ScratchLikeExprFunc {
     }
 
 }
+
+
+export class ScratchLikeMinus implements ScratchLikeExprFunc {
+
+    argList : [ScratchLikeExprFunc, ScratchLikeExprFunc]
+
+    constructor(arg1 : ScratchLikeExprFunc, arg2 : ScratchLikeExprFunc) {
+        this.argList = [arg1, arg2];
+    }
+
+    exec() {
+        const res1 = this.argList[0].exec();
+        const res2 = this.argList[1].exec();
+
+        return typeof res1 === 'number' && typeof res2 === 'number' ?
+             res1 - res2
+             : 0;
+    }
+
+}

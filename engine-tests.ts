@@ -66,7 +66,7 @@ codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'blocking' 
     
     code.forEach((block) => block.register(emitter));
     const parsedEvents = code.filter(block => block.isEvent()).map((block : ScratchLikeEvent) => block);
-    parsedEvents[0].trigger({player: testPlayer, mapItem: testMapItem, gameId: "foo", sprite: testSprite})
+    parsedEvents[1].trigger({player: testPlayer, mapItem: testMapItem, gameId: "foo", sprite: testSprite})
 
     
     for(let i = 0; i < 4; i++) {

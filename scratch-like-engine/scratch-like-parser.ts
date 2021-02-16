@@ -1,6 +1,6 @@
 import { parseString } from 'xml2js';
 import { ScratchLikeEvent, ScratchLikeFunc } from './dsl/core';
-import { ScratchLikeExprFunc, ScratchLikeLiteral, ScratchLikePlus, ScratchLikePropGetter } from './dsl/expr-func';
+import { ScratchLikeExprFunc, ScratchLikeLiteral, ScratchLikeMinus, ScratchLikePlus, ScratchLikePropGetter } from './dsl/expr-func';
 import Forever from './dsl/Forever';
 import MakePlayerSay from './dsl/MakePlayerSay';
 import NextCostume from './dsl/NextCostume';
@@ -27,6 +27,8 @@ const parseExprBlock : (block : any, getProp : (key: string) => any) => ScratchL
             return new ScratchLikePropGetter('costumeIdx', getProp);
         case 'operator_add':
             return new ScratchLikePlus(values[0], values[1]);
+        case 'operator_subtract':
+            return new ScratchLikeMinus(values[0], values[1]);
         case 'operator_not':
             return new ScratchLikeNot(values[0]);
         case 'operator_equals':
