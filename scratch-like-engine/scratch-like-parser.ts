@@ -14,6 +14,7 @@ import IsBlockingPlayer from './dsl/IsBlockingPlayer';
 import ScratchLikeIf from './dsl/ScratchLikeIf';
 import { ScratchLikeAnd, ScratchLikeEquals, ScratchLikeNot, ScratchLikeOr } from './dsl/bool-func';
 import ScratchLikeIfElse from './dsl/ScratchLikeIfElse';
+import RepeatUntil from './dsl/RepeatUntil';
 
 
 const isNumberType = (fieldName : string) => ['NUM', 'COSTUME_SELECT'].indexOf(fieldName) > -1
@@ -84,6 +85,8 @@ const parseBlock : (block : any, getProp : (key: string) => any) => ScratchLikeF
             return new Forever(block['$'].id, next, statements[0]);
         case "control_repeat":
             return new Repeat(block['$'].id, next, statements[0], value);
+        case "control_repeat_until":
+            return new RepeatUntil(block['$'].id, next, statements[0], value);
         default:
             console.error(`Block type not recognised: ${block['$'].type}`)
             return new ScratchLikeSequenceFunc(block['$'].type, next);
@@ -96,13 +99,17 @@ const parseObject : (codeObj : { [key: string] : any }, getProp : (key : string)
 const parseXml = (code : String, getProp : (key : string) => any) => {
 
     return new Promise<Array<ScratchLikeEvent>>((resolve, reject) => {
-        parseString(code, (err, result) => {
-            if (err !== null) {
-                reject(err);
-            } else {
-                resolve(parseObject(result.xml, getProp));
-            }
-        });
+        try {
+            parseString(code, (err, result) => {
+                if (err !== null) {
+                    reject(err);
+                } else {
+                    resolve(parseObject(result.xml, getProp));
+                }
+            });
+        } catch (e) {
+            reject(e);
+        }
     });
 }
 
@@ -112,6 +119,7 @@ const codeFromXml = async (code : String, getProp : (key : string) => any) => {
         return data.filter(block => block.isEvent());
     } catch (err) {
         console.error(err);
+        return [];
     }
 }
 

@@ -58,7 +58,7 @@ codeFromXml(readFileSync('tests/1.xml').toString()).then((code) => {
 });
 */
 
-codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'blocking' ? 'yes' : 0 ).then((code) => {
+codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'blocking' ? 'no' : 3 ).then((code) => {
     const emitter = new EventEmitter();
     emitter.addListener("scratch_like_dispatch", (msg) => console.log(JSON.stringify(msg)));
 
@@ -66,7 +66,7 @@ codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'blocking' 
     
     code.forEach((block) => block.register(emitter));
     const parsedEvents = code.filter(block => block.isEvent()).map((block : ScratchLikeEvent) => block);
-    parsedEvents[1].trigger({player: testPlayer, mapItem: testMapItem, gameId: "foo", sprite: testSprite})
+    parsedEvents[0].trigger({player: testPlayer, mapItem: testMapItem, gameId: "foo", sprite: testSprite})
 
     
     for(let i = 0; i < 4; i++) {
@@ -76,4 +76,4 @@ codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'blocking' 
         emitter.emit("galactic-tick");
     }
 
-});
+}).catch((reason) => console.log(reason))
