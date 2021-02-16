@@ -51,7 +51,7 @@ const parseValue : (value : any, getProp : (key: string) => any) => ScratchLikeE
     return new ScratchLikeLiteral(value.shadow[0].field[0]["_"]);
 }
 
-const parseStatement : (statement, getProp : (key: string) => any) => ScratchLikeFunc = (statement, getProp) => {
+const parseStatement : (statement : any, getProp : (key: string) => any) => ScratchLikeFunc = (statement, getProp) => {
     return parseBlock(statement.block[0], getProp);
 }
 
@@ -89,7 +89,7 @@ const parseBlock : (block : any, getProp : (key: string) => any) => ScratchLikeF
 }
 
 const parseObject : (codeObj : { [key: string] : any }, getProp : (key : string) => any) => Array<ScratchLikeEvent> = (codeObj, getProp) => 
-    (codeObj.block || []).map(block => parseBlock(block, getProp));
+    (codeObj.block || []).map((block : any) => parseBlock(block, getProp));
 
 const parseXml = (code : String, getProp : (key : string) => any) => {
 

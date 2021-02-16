@@ -7,10 +7,16 @@ export interface GameCode {
     eventTriggers: Array<ScratchLikeEvent>
 }
 
+export interface Conversation {
+    words : string
+    timestamp : number
+}
+
 export interface Game {
     mapId : number
     gameId : string
     players : Array<Player>
+    conversations : {[key : string] : Conversation }
     mapData : MapData
     timestamp? : number
     code?: Array<GameCode>
@@ -37,10 +43,10 @@ export interface Player {
     animIdx : number
     lastAnimIdx : number
     updatedAt : number
-    words? : string
+    name : string
 }
 
-export const initPlayer : (id? : string) => Player = (id) => ({
+export const initPlayer : (id? : string, name? : string) => Player = (id, name) => ({
     id: id || null,
     direction: Direction.DOWN,
     state: PlayerState.STANDING,
@@ -51,5 +57,6 @@ export const initPlayer : (id? : string) => Player = (id) => ({
     speed: 0.13,
     animIdx: 0,
     lastAnimIdx: 0,
-    updatedAt: 0
+    updatedAt: 0,
+    name: name || "anonymous"
 });
