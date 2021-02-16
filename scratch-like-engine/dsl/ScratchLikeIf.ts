@@ -15,7 +15,7 @@ export default class ScratchLikeIf extends ScratchLikeSequenceFunc {
 
     register(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
 
-        if (this.test.exec()) {
+        if (this.test.exec() && this.subStackFunc) {
             this.subStackFunc.register(emitter, detail, () => {
                 this.doNext(emitter, detail, endSequence);
             })

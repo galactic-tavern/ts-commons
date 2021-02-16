@@ -15,7 +15,7 @@ export default class RepeatUntil extends ScratchLikeSequenceFunc {
 
     register(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
 
-        if (!this.test.exec()) {
+        if (!this.test.exec() && this.subStackFunc) {
             this.subStackFunc.register(emitter, detail, () => {
                 this.register(emitter, detail, endSequence)
             })
