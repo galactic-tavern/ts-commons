@@ -20,6 +20,7 @@ export interface Game {
     mapData : MapData
     timestamp? : number
     code?: Array<GameCode>
+    clearInterval: () => void
 }
 
 export interface DrawLayer {

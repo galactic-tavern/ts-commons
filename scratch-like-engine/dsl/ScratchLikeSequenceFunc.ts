@@ -20,12 +20,12 @@ export default class ScratchLikeSequenceFunc implements ScratchLikeSequenceStep 
         console.error("exec not implemented for block: " + this.id);
     }
     
-    register(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
-        emitter.once("galactic-tick", () => {
+    register(tickEventId : string, emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
+        emitter.once(tickEventId, () => {
             this.exec(emitter, detail);
 
             if (this.nextFunc !== null) {
-                this.nextFunc.register(emitter, detail, endSequence);
+                this.nextFunc.register(tickEventId, emitter, detail, endSequence);
             } else {
                 endSequence();
             }

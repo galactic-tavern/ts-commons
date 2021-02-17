@@ -13,17 +13,17 @@ export default class Repeat extends ScratchLikeSequenceFunc {
     }
 
 
-    register(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
+    register(tickEventId : string, emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
         const arg = this.valueGetter.exec();
         const totalTimes : number =  typeof arg === 'number' ? arg : 0;
         const timesLeft = typeof detail.timesLeft === 'undefined' ? totalTimes : detail.timesLeft;
 
         if (this.subStackFunc && timesLeft > 0) {
-            this.subStackFunc.register(emitter, detail, () => {
-                this.register(emitter, {...detail, timesLeft: timesLeft - 1}, endSequence)
+            this.subStackFunc.register(tickEventId, emitter, detail, () => {
+                this.register(tickEventId, emitter, {...detail, timesLeft: timesLeft - 1}, endSequence)
             })
         } else if (this.nextFunc) {
-            this.nextFunc.register(emitter, detail, endSequence);
+            this.nextFunc.register(tickEventId, emitter, detail, endSequence);
         } else {
             endSequence();
         }

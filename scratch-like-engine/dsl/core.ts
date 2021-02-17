@@ -32,7 +32,7 @@ export interface ScratchLikeDispatcher {
 
 export interface ScratchLikeFunc {
     getId(): string
-    register(...args : any[]): void
+    register(tickEventId : string, emitter : ScratchLikeDispatcher, ...args : any[]): void
     isEvent(): boolean
 }
 
@@ -40,11 +40,11 @@ export interface ScratchLikeEvent extends ScratchLikeFunc {
     endSequence(): void
     getEventType(): ScratchLikeEventType
     trigger(detail : InvokeDetail): void
-    register(emitter : ScratchLikeDispatcher): void
+    register(tickEventId : string, emitter : ScratchLikeDispatcher): void
 }
 
 export interface ScratchLikeSequenceStep extends ScratchLikeFunc {
-    register(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void): void
+    register(tickEventId : string, emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void): void
     exec(emitter : ScratchLikeDispatcher, detail? : InvokeDetail): void
 }
 

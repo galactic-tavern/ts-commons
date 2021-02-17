@@ -13,20 +13,20 @@ export default class ScratchLikeIf extends ScratchLikeSequenceFunc {
     }
 
 
-    register(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
+    register(tickEventId : string, emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
 
         if (this.test.exec() && this.subStackFunc) {
-            this.subStackFunc.register(emitter, detail, () => {
-                this.doNext(emitter, detail, endSequence);
+            this.subStackFunc.register(tickEventId, emitter, detail, () => {
+                this.doNext(tickEventId, emitter, detail, endSequence);
             })
         } else {
-            this.doNext(emitter, detail, endSequence);
+            this.doNext(tickEventId, emitter, detail, endSequence);
         }
     }
 
-    doNext(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
+    doNext(tickEventId : string, emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
         if (this.nextFunc) {
-            this.nextFunc.register(emitter, detail, endSequence);
+            this.nextFunc.register(tickEventId, emitter, detail, endSequence);
         } else {
             endSequence();
         }

@@ -10,10 +10,10 @@ export default class Forever extends ScratchLikeSequenceFunc {
     }
 
 
-    register(emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
+    register(tickEventId : string, emitter : ScratchLikeDispatcher, detail : InvokeDetail, endSequence : () => void) {
         if (this.subStackFunc) {
-            this.subStackFunc.register(emitter, detail, () => {
-                this.register(emitter, detail, endSequence)
+            this.subStackFunc.register(tickEventId, emitter, detail, () => {
+                this.register(tickEventId, emitter, detail, endSequence)
             })
         }
     }

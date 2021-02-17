@@ -64,16 +64,16 @@ codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'blocking' 
 
 //    console.log(code);
     
-    code.forEach((block) => block.register(emitter));
+    code.forEach((block) => block.register("tickytick", emitter));
     const parsedEvents = code.filter(block => block.isEvent()).map((block : ScratchLikeEvent) => block);
     parsedEvents[0].trigger({player: testPlayer, mapItem: testMapItem, gameId: "foo", sprite: testSprite})
 
     
     for(let i = 0; i < 4; i++) {
         console.log(`${i + 1} - iteration`);
-        emitter.emit("galactic-tick");
-        emitter.emit("galactic-tick");
-        emitter.emit("galactic-tick");
+        emitter.emit("tickytick");
+        emitter.emit("tickytick");
+        emitter.emit("tickytick");
     }
 
 }).catch((reason) => console.log(reason))

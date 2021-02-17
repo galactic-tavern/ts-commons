@@ -5,6 +5,7 @@ export default class ScratchLikeBaseEvent  {
     private id : string
     private emitter : ScratchLikeDispatcher = null;
     private sequenceIsRunning = false;
+    private tickEventId: string;
 
     constructor(id: string, nextFunc : ScratchLikeFunc) {
         this.id = id;
@@ -26,11 +27,12 @@ export default class ScratchLikeBaseEvent  {
     trigger(detail : InvokeDetail) {
         if (!this.sequenceIsRunning && this.nextFunc !== null) {
             this.sequenceIsRunning = true;
-            this.nextFunc.register(this.emitter, detail, () => this.endSequence());
+            this.nextFunc.register(this.tickEventId, this.emitter, detail, () => this.endSequence());
         }
     }
 
-    register(emitter : ScratchLikeDispatcher) {
+    register(tickEventId : string, emitter : ScratchLikeDispatcher) {
+        this.tickEventId = tickEventId;
         this.emitter = emitter;
     }
 }
