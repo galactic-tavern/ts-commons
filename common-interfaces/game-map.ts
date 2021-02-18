@@ -15,7 +15,10 @@ export interface MapLayer {
     updatedAt : number
 }
 
-export enum MapVersion { VERSION_1_0 = "1.0" }
+export enum MapVersion { 
+    VERSION_1_0 = "1.0",
+    VERSION_1_1 = "1.1"
+}
 
 export interface GameMap {
     version : MapVersion
