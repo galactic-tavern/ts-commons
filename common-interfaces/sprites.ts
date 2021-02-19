@@ -1,3 +1,10 @@
+export interface BoundingBox {
+    x1 : number
+    y1 : number
+    x2 : number
+    y2 : number
+}
+
 export interface Sprite {
     id : number
     name : string
@@ -6,6 +13,8 @@ export interface Sprite {
     width : number
     height : number
     images? : Array<string>
+    imageData? : Array<HTMLImageElement>
+    boundingBoxes? : Array<BoundingBox>
     costumeNames?: {[key: string]: number}    
     animIdx : number
     defaultProps : {[key: string]: string}
