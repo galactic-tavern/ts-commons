@@ -47,4 +47,7 @@ const rectsIntersect = (minAx : number, minAy : number, maxAx : number, maxAy : 
                         minBx : number, minBy : number, maxBx : number, maxBy : number) =>  
     maxAx >= minBx && minAx <= maxBx && minAy <= maxBy && maxAy >= minBy 
 
-export { mapCenter, relativePos, gridPos, drawPos, rectsIntersect, gameGridPos }
+const distance = (a : Pos, b : Pos) : number =>
+    Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+
+export { mapCenter, relativePos, gridPos, drawPos, rectsIntersect, gameGridPos, distance }
