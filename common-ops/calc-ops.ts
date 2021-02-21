@@ -35,9 +35,16 @@ const gridPos = (dims : Dims, mapPos: Pos, {x : mouseX, y : mouseY} : Pos) => {
     return _gridPos(cPos, relativePos(cPos, {x: mouseX, y : mouseY}));
 }
 
+const gameGridPos = (xPos : number, yPos : number) =>
+    gridPos({width: 320, height: 320}, {x: -xPos, y: -yPos}, {x : 160, y: 160})
+
 const drawPos = ({mX, mY} : MapCenter, {x, y} : Pos) => ({
     dX: x * 32 + mX,
     dY: y * 32 + mY
 })
 
-export { mapCenter, relativePos, gridPos, drawPos }
+const rectsIntersect = (minAx : number, minAy : number, maxAx : number, maxAy : number,
+                        minBx : number, minBy : number, maxBx : number, maxBy : number) =>  
+    maxAx >= minBx && minAx <= maxBx && minAy <= maxBy && maxAy >= minBy 
+
+export { mapCenter, relativePos, gridPos, drawPos, rectsIntersect, gameGridPos }

@@ -29,7 +29,7 @@ export interface DrawLayer {
 }
 
 export enum Direction {UP, RIGHT, LEFT, DOWN};
-export enum PlayerState {STANDING, WALKING, ENDING_WALK}
+export enum PlayerState {STANDING, WALKING}
 
 
 export interface Player {
