@@ -58,7 +58,7 @@ codeFromXml(readFileSync('tests/1.xml').toString()).then((code) => {
 });
 */
 
-codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'blocking' ? 'no' : 3 ).then((code) => {
+codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'touchingPlayers' ? ["asd"] : 3 ).then((code) => {
     const emitter = new EventEmitter();
     emitter.addListener("scratch_like_dispatch", (msg) => console.log(JSON.stringify(msg)));
 
@@ -69,10 +69,8 @@ codeFromXml(readFileSync('tests/2.xml').toString(), (key) => key === 'blocking' 
     parsedEvents[0].trigger({player: testPlayer, mapItem: testMapItem, gameId: "foo", sprite: testSprite})
 
     
-    for(let i = 0; i < 4; i++) {
+    for(let i = 0; i < 300_000; i++) {
         console.log(`${i + 1} - iteration`);
-        emitter.emit("tickytick");
-        emitter.emit("tickytick");
         emitter.emit("tickytick");
     }
 

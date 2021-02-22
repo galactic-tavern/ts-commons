@@ -15,6 +15,9 @@ import ScratchLikeIf from './dsl/ScratchLikeIf';
 import { ScratchLikeAnd, ScratchLikeEquals, ScratchLikeNot, ScratchLikeOr } from './dsl/bool-func';
 import ScratchLikeIfElse from './dsl/ScratchLikeIfElse';
 import RepeatUntil from './dsl/RepeatUntil';
+import IsTouchingPlayer from './dsl/IsTouchingPlayer';
+import Wait from './dsl/Wait';
+import WaitUntil from './dsl/WaitUntil';
 
 
 const isNumberType = (fieldName : string) => ['NUM', 'COSTUME_SELECT'].indexOf(fieldName) > -1
@@ -22,6 +25,8 @@ const isNumberType = (fieldName : string) => ['NUM', 'COSTUME_SELECT'].indexOf(f
 const parseExprBlock : (block : any, getProp : (key: string) => any) => ScratchLikeExprFunc = (block, getProp) => {
     const values = (block.value || []).map((val : any) => parseValue(val, getProp));
     switch (block["$"].type) {
+        case 'sensing_touchingplayer':
+            return new IsTouchingPlayer('touchingPlayers', getProp);
         case 'motion_isblockingplayer':
             return new IsBlockingPlayer('blocking', getProp);
         case 'looks_currentcostume':
@@ -70,7 +75,7 @@ const parseBlock : (block : any, getProp : (key: string) => any) => ScratchLikeF
         case "control_if_else":
             return new ScratchLikeIfElse(block['$'].id, next, statements[0], statements[1], value)
         case "looks_makeplayersay":
-            return new MakePlayerSay(block['$'].id, next, value);
+            return new MakePlayerSay(block['$'].id, next, value, getProp);
         case "looks_switchcostumeto":
             return new SwitchCostumeTo(block['$'].id, next, value);
         case "motion_setblockplayer":
@@ -83,6 +88,10 @@ const parseBlock : (block : any, getProp : (key: string) => any) => ScratchLikeF
             return new WhenMapStarts(block['$'].id, next);
         case "control_forever":
             return new Forever(block['$'].id, next, statements[0]);
+        case "control_wait":
+            return new Wait(block['$'].id, next, value);
+        case "control_wait_until":
+            return new WaitUntil(block['$'].id, next, value);
         case "control_repeat":
             return new Repeat(block['$'].id, next, statements[0], value);
         case "control_repeat_until":
