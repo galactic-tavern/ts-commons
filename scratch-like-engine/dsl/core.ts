@@ -17,7 +17,8 @@ export interface InvokeDetail {
     player : Player
     mapItem? : MapItem
     sprite? : Sprite
-    timesLeft? : number
+    [key : string] : any
+
 }
 
 export enum ScratchLikeEventType {

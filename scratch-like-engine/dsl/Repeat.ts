@@ -19,9 +19,11 @@ export default class Repeat extends ScratchLikeSequenceFunc {
         const timesLeft = typeof detail[`timesLeft(${this.getId()})`] === 'undefined' ? totalTimes : detail[`timesLeft(${this.getId()})`];
 
         if (this.subStackFunc && timesLeft > 0) {
-            this.subStackFunc.register(tickEventId, emitter, detail, () => {
-                this.register(tickEventId, emitter, {...detail, [`timesLeft(${this.getId()})`]: timesLeft - 1}, endSequence)
-            })
+            emitter.once(tickEventId, () =>
+                this.subStackFunc.register(tickEventId, emitter, detail, () => {
+                    this.register(tickEventId, emitter, {...detail, [`timesLeft(${this.getId()})`]: timesLeft - 1}, endSequence)
+                })
+            );
         } else if (this.nextFunc) {
             this.nextFunc.register(tickEventId, emitter, detail, endSequence);
         } else {

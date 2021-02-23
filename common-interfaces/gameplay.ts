@@ -45,6 +45,7 @@ export interface Player {
     lastAnimIdx : number
     updatedAt : number
     name : string
+    touchingMapItems? : Array<MapItem>
 }
 
 export const initPlayer : (id? : string, name? : string) => Player = (id, name) => ({

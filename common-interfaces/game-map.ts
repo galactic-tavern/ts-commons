@@ -8,7 +8,6 @@ export interface MapItem extends Pos {
     props : {[key : string] : string}
     code? : string
     eventTriggers? : Array<ScratchLikeEvent>
-    touchingPlayers? : Array<string>
 }
 
 export interface MapLayer {

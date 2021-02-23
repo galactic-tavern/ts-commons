@@ -16,8 +16,8 @@ export default class MakePlayerSay extends ScratchLikeSequenceFunc {
     exec(emitter : ScratchLikeDispatcher, detail : InvokeDetail) {
         const touchingPlayers = this.propGetter("touchingPlayers");
 
-        const playerId = detail.player && detail.player.id ? detail.player.id :
-            touchingPlayers && touchingPlayers.length > 0 ? touchingPlayers[0] : "";
+        const playerId = 
+            touchingPlayers && touchingPlayers.length > 0 ? touchingPlayers[0] : detail.player && detail.player.id ? detail.player.id : "";
 
         
         emitter.emit("scratch_like_dispatch", {
