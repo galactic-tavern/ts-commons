@@ -21,7 +21,8 @@ export enum MapVersion {
 }
 
 export interface GameMap {
-    version : MapVersion
+    version : MapVersion,
+    messageNames? : Array<string>
     layers : {[key : string] : MapLayer }
 }
 
