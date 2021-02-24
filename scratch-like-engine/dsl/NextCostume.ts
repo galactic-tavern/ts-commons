@@ -11,6 +11,5 @@ export default class NextCostume extends ScratchLikeSequenceFunc {
                 mapItem: detail.mapItem
             }
         });
-
     }
 }

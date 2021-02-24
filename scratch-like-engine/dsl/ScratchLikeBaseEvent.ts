@@ -3,9 +3,9 @@ import { InvokeDetail, ScratchLikeDispatcher, ScratchLikeFunc } from "./core";
 export default class ScratchLikeBaseEvent  {
     private nextFunc : ScratchLikeFunc = null
     private id : string
-    private emitter : ScratchLikeDispatcher = null;
+    protected emitter : ScratchLikeDispatcher = null;
     private sequenceIsRunning = false;
-    private tickEventId: string;
+    protected tickEventId: string;
 
     constructor(id: string, nextFunc : ScratchLikeFunc) {
         this.id = id;

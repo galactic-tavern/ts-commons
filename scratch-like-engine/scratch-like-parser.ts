@@ -18,6 +18,8 @@ import RepeatUntil from './dsl/RepeatUntil';
 import IsTouchingPlayer from './dsl/IsTouchingPlayer';
 import Wait from './dsl/Wait';
 import WaitUntil from './dsl/WaitUntil';
+import WhenBroadcastReceived from './dsl/WhenBroadcastReceived';
+import ScratchLikeBroadcast from './dsl/ScratchLikeBroadcast';
 
 
 const isNumberType = (fieldName : string) => ['NUM', 'COSTUME_SELECT'].indexOf(fieldName) > -1
@@ -68,6 +70,7 @@ const parseBlock : (block : any, getProp : (key: string) => any) => ScratchLikeF
     const next = block.next ? parseBlock(block.next[0].block[0], getProp) : null;
     const value = block.value ? parseValue(block.value[0], getProp) : new ScratchLikeLiteral("");
     const statements = block.statement ? block.statement.map((s : any) => parseStatement(s, getProp)) : [];
+    const field = block.field ? block.field[0]["_"] : "message1";
 
     switch (block["$"].type) {
         case "control_if":
@@ -82,6 +85,10 @@ const parseBlock : (block : any, getProp : (key: string) => any) => ScratchLikeF
             return new SetBlockPlayer(block['$'].id, next, value);
         case "looks_nextcostume":
             return new NextCostume(block['$'].id, next);
+        case "event_broadcast":
+            return new ScratchLikeBroadcast(block['$'].id, next, field)
+        case "event_whenbroadcastreceived":
+            return new WhenBroadcastReceived(block['$'].id, next, field);
         case "event_whenplayerinteracts":
             return new WhenPlayerInteracts(block['$'].id, next);
         case "event_whenmapstarts":

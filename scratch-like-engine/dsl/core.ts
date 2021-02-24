@@ -9,7 +9,8 @@ export enum ScratchLikeActionTypes {
     MAKE_PLAYER_SAY = "set_player_words",
     NEXT_COSTUME = "next_costume",
     SET_BLOCK_PLAYER = "SET_BLOCK_PLAYER",
-    SWITCH_COSTUME_TO = "SWITCH_COSTUME_TO"
+    SWITCH_COSTUME_TO = "SWITCH_COSTUME_TO",
+    BROADCAST = "BROADCAST"
 }
 
 export interface InvokeDetail {
@@ -23,7 +24,8 @@ export interface InvokeDetail {
 
 export enum ScratchLikeEventType {
     PLAYER_INTERACTS,
-    MAP_STARTS
+    MAP_STARTS,
+    BROADCAST_RECEIVED
 }
 
 export interface ScratchLikeDispatcher {

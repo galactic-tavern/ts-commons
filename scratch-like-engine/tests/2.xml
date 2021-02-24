@@ -1,1 +1,75 @@
-<xml xmlns="http://www.w3.org/1999/xhtml"><variables></variables><block type="event_whenmapstarts" id="tp#bLWQF}2T4u1(YH77Y" x="298" y="133"><next><block type="control_forever" id="o4M1B%M$OF4$_?/C5V`{"><statement name="SUBSTACK"><block type="control_if" id="+2VyV)=FwZ/J({Z`tI:p"><value name="CONDITION"><block type="sensing_touchingplayer" id="jk[nJx]{[1|^|S~NEYG9"></block></value><statement name="SUBSTACK"><block type="looks_makeplayersay" id="[e`ZT`w)~5z~,kUXk=/8"><value name="MESSAGE"><shadow type="text" id="W|w-ljk#olo#TiQ?yF$P"><field name="TEXT">foo</field></shadow></value></block></statement></block></statement></block></next></block></xml>
+<?xml version="1.0"?>
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <variables>
+    <variable type="broadcast_msg" id="YqGI(#GE*WazT}l:xyOh" islocal="false" iscloud="false">arkarn</variable>
+    <variable type="broadcast_msg" id="+WwF5ws+K`FP)1AyX.vK" islocal="false" iscloud="false">rolex</variable>
+    <variable type="broadcast_msg" id="/UCe8L|=muQ#@Y^G;=xh" islocal="false" iscloud="false">message1</variable>
+  </variables>
+  <block type="event_whenplayerinteracts" id="J/~Mmm-|p|~ljKB{13xN" x="742" y="367">
+    <next>
+      <block type="control_if_else" id="0*Crj[3Xc*PJ/Q*@d(ZD">
+        <value name="CONDITION">
+          <block type="operator_equals" id="%,R*A]s*=#j1EjyMmSl%">
+            <value name="OPERAND1">
+              <shadow type="text" id="Q!He}q9-s3]LR:zK[n1A">
+                <field name="TEXT"/>
+              </shadow>
+              <block type="looks_currentcostume" id="CSsBcu?5BWpz1[J0wdFI"/>
+            </value>
+            <value name="OPERAND2">
+              <shadow type="text" id="L_$?w|Kw|Z/t^US8ol`W">
+                <field name="TEXT">0</field>
+              </shadow>
+            </value>
+          </block>
+        </value>
+        <statement name="SUBSTACK">
+          <block type="looks_switchcostumeto" id="6-+h~$x2|j^6K)O6.P7x">
+            <value name="COSTUME">
+              <shadow type="looks_costume_select_menu" id="22;]100JX%@N?p7fY-40">
+                <field name="COSTUME_SELECT">1</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="looks_switchcostumeto" id="YEp_J)Qy{uAq$w:~Z$nZ">
+                <value name="COSTUME">
+                  <shadow type="looks_costume_select_menu" id="3VP,12,q/9ud.P(j`#s2">
+                    <field name="COSTUME_SELECT">2</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="event_broadcast" id="mYEp`}C~2Zv]}Y,ZSwGE">
+                    <field name="BROADCAST_OPTION" id="YqGI(#GE*WazT}l:xyOh" variabletype="broadcast_msg">arkarn</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <statement name="SUBSTACK2">
+          <block type="looks_switchcostumeto" id="0ENwh(%rBkezWE}j4nIZ">
+            <value name="COSTUME">
+              <shadow type="looks_costume_select_menu" id="1}I:=KGheMRqm46`9oID">
+                <field name="COSTUME_SELECT">1</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="looks_switchcostumeto" id="H*+4sM7A(A7uxp@Y;2Bc">
+                <value name="COSTUME">
+                  <shadow type="looks_costume_select_menu" id="4|(9oW+Y:m;XEWbh8q]3">
+                    <field name="COSTUME_SELECT">0</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="event_broadcast" id="zsnIpijfjK1$WgWr):hA">
+                    <field name="BROADCAST_OPTION" id="+WwF5ws+K`FP)1AyX.vK" variabletype="broadcast_msg">rolex</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </next>
+  </block>
+</xml>
